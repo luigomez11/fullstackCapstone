@@ -20,9 +20,7 @@ app.use(express.static('public'));
 
 /*app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
-});
-
-app.use('/foods', foodListRouter);*/
+});*/
 
 app.get('/foodList', (req,res) => {
   foodItem
