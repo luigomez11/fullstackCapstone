@@ -40,9 +40,9 @@ app.get('/foodList', (req,res) => {
 });
 
 app.get('/foodList/:id', (req,res) => {
-  foodList
+  foodItem
     .findById(req.params.id)
-    .then(food => res.json(restaurant.serialize()))
+    .then(food => res.json(food.serialize()))
     .catch(err => {
       console.error(err);
       res.status(500).json({ message: 'Internal server error'});
@@ -60,10 +60,10 @@ app.post('/foodList', (req, res) => {
     }
   }
 
-  foodList
+  foodItem
     .create({
       name: req.body.name,
-      calories: req.calories
+      calories: req.body.calories
     })
     .then(food => res.status(201).json(food.serialize()))
     .catch(err => {
