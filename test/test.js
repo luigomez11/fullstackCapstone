@@ -17,7 +17,7 @@ describe('server', function(){
 
     it('should return a 200 status code', function(){
         return chai.request(app)
-            .get('/')
+            .get('/foodList')
             .then(function(res){
                 expect(res).to.have.status(200);
             });
