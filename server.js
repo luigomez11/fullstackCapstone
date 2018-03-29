@@ -1,48 +1,149 @@
+'use strict';
+
+const bodyParser = require('body-parser');
 const express = require('express');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
+
+mongoose.Promise = global.Promise;
+
+const {PORT, DATABASE_URL} = require('./config');
+const { foodItem } = require('./models');
 
 const app = express();
+app.use(bodyParser.json());
 
-const foodListRouter = require('./foodListRouter');
+//const foodListRouter = require('./foodListRouter');
 
 app.use(morgan('common'));
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-app.use('/foods', foodListRouter);
+app.use('/foods', foodListRouter);*/
+
+app.get('/foodList', (req,res) => {
+  foodItem
+    .find()
+    .then(foods => {
+      res.json({
+        foods: foods.map(
+          (food) => food.serialize())
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ message: 'Internal server error'});
+    });
+});
+
+app.get('/foodList/:id', (req,res) => {
+  foodList
+    .findById(req.params.id)
+    .then(food => res.json(restaurant.serialize()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ message: 'Internal server error'});
+    });
+});
+
+app.post('/foodList', (req, res) => {
+  const requiredFields = ['name', 'calories'];
+  for(let i=0; i<requiredFields.length; i++){
+    const field = requiredFields[i];
+    if(!(field in req.body)){
+      const message = `Missing \`${field}\` in request body`;
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  }
+
+  foodList
+    .create({
+      name: req.body.name,
+      calories: req.calories
+    })
+    .then(food => res.status(201).json(food.serialize()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ message: 'Internal server error'});
+    });
+});
+
+app.put('/foodList/:id', (req, res) => {
+  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+    const message = (
+      `Request path id (${req.params.id}) and request body id ` +
+      `(${req.body.id}) must match`);
+    console.error(message);
+    return res.status(400).json({ message: message });
+  }
+
+  const toUpdate = {};
+  const updateableFields = ['name', 'calories'];
+
+  updateableFields.forEach(field => {
+    if(field in req.body){
+      toUpdate[field] = req.body[field];
+    }
+  });
+
+  foodItem
+    .findByIdAndUpdate(req.params.id, {$set: toUpdate})
+    .then(food => res.status(204).end())
+    .catch(err => res.status(500).json({ message: 'Internal server error'}));
+});
+
+app.delete('/foodList/:id', (req, res) => {
+  foodItem
+    .findByIdAndRemove(req.params.id)
+    .then(food => res.status(204).end())
+    .catch(err => res.status(500).json({ message: 'Internal server error'}));
+});
+
+app.use('*', function(req,res){
+  res.status(404).json({ message: 'Not found'});
+});
 
 let server;
 
-function runServer() {
-  const port = process.env.PORT || 8080;
+function runServer(databaseUrl, port = PORT) {
+
   return new Promise((resolve, reject) => {
-    server = app.listen(port, () => {
-      console.log(`Your app is listening on port ${port}`);
-      resolve(server);
-    }).on('error', err => {
-      reject(err)
+    mongoose.connect(databaseUrl, err => {
+      if (err) {
+        return reject(err);
+      }
+      server = app.listen(port, () => {
+        console.log(`Your app is listening on port ${port}`);
+        resolve();
+      })
+        .on('error', err => {
+          mongoose.disconnect();
+          reject(err);
+        });
     });
   });
 }
 
 function closeServer() {
-  return new Promise((resolve, reject) => {
-    console.log('Closing server');
-    server.close(err => {
-      if (err) {
-        reject(err);
-        return;
-      }
-      resolve();
+  return mongoose.disconnect().then(() => {
+    return new Promise((resolve, reject) => {
+      console.log('Closing server');
+      server.close(err => {
+        if (err) {
+          return reject(err);
+        }
+        resolve();
+      });
     });
   });
 }
 
 if (require.main === module) {
-  runServer().catch(err => console.error(err));
+  runServer(DATABASE_URL).catch(err => console.error(err));
 };
 
 module.exports = {app, runServer, closeServer};
