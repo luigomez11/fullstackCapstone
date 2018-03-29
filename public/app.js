@@ -26,11 +26,14 @@ function getUserInput(display){
 };
 
 function displayUserInput(data){
-    for(index in data.calories){
-        $('body').append(
-            '<p>' + data.calories[index].text + '</p>'
-        );
-    };
+    console.log(data);
+    data.calories.forEach(function(item){
+        for(key in item){
+            $('body').append(
+                '<p>' + item[key] + '</p>'
+            );
+        }
+    });
 };
 
 function getAndDisplayUserInput(){
