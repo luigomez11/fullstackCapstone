@@ -60,7 +60,7 @@ describe('Calories API resource', function(){
                 .then(function(_res){
                     res = _res;
                     expect(res).to.have.status(200);
-                    expect(res.body.foods).to.have.length.of.at.least(1);
+                    expect(res.body.foods).to.have.lengthOf.at.least(1);
                     return foodItem.count(1);
                 })
                 .then(function(count){
@@ -106,7 +106,6 @@ describe('Calories API resource', function(){
                     expect(res.body).to.be.a('object');
                     expect(res.body).to.include.keys('id','name','calories');
                     expect(res.body.name).to.equal(newFood.name);
-                    expect(res.body.id).to.be.null;
                     expect(res.body.calories).to.equal(newFood.calories);
                 })
                 .then(function(food){
