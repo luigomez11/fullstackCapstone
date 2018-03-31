@@ -76,7 +76,7 @@ describe('Calories API resource', function(){
                     expect(res).to.have.status(200);
                     expect(res).to.be.json;
                     expect(res.body.foods).to.be.a('array');
-                    expect(res.body.foods).to.have.length.of.at.least(1);
+                    expect(res.body.foods).to.have.lengthOf.at.least(1);
 
                     res.body.foods.forEach(function(food){
                         expect(food).to.be.a('object');
