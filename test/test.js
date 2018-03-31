@@ -25,7 +25,7 @@ function seedFoodData(){
 
 function generateFoodData(){
     return {
-        name: faker.random.word(),
+        name: faker.company.companyName(),
         calories: faker.random.number()
     };
 }
@@ -64,7 +64,7 @@ describe('Calories API resource', function(){
                     return foodItem.count(1);
                 })
                 .then(function(count){
-                    expect(res.body.foods).to.have.length.of(count);
+                    expect(res.body.foods).to.have.lengthOf(count);
                 });
         });
 
