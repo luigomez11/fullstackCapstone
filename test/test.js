@@ -108,10 +108,10 @@ describe('Calories API resource', function(){
                     expect(res.body.name).to.equal(newFood.name);
                     expect(res.body.calories).to.equal(newFood.calories);
                 })
-                .then(function(food){
-                    //expect(food.name).to.equal(newFood.name);
+                /*.then(function(food){
+                    expect(food.name).to.equal(newFood.name);
                     expect(food.calories).to.equal(newFood.calories);
-                });
+                });*/
         });
     });
 
