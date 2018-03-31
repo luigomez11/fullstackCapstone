@@ -4,7 +4,7 @@ function getUserInput(display){
 
 function displayUserInput(data){
     console.log(data);
-    data.calories.forEach(function(item){
+    data.foods.forEach(function(item){
         for(key in item){
             $('body').append(
                 '<p>' + item[key] + '</p>'
