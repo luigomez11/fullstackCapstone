@@ -13,8 +13,6 @@ const { foodItem } = require('./models');
 const app = express();
 app.use(bodyParser.json());
 
-//const foodListRouter = require('./foodListRouter');
-
 app.use(morgan('common'));
 app.use(express.static('public'));
 
