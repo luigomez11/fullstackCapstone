@@ -6,7 +6,7 @@ function displayUserInput(data){
     console.log(data);
     data.foods.forEach(function(item){
         for(key in item){
-            $('body').append(
+            $('.log').append(
                 '<p>' + item[key] + '</p>'
             );
         }
