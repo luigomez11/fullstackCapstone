@@ -12,7 +12,7 @@
         <p>Welcome Screen. Insert description here. Click to continue</p>
         <button class="welcomeButton">Continue</button>
     </div>
-    <div class="calorieCalculator">
+    <div class="calorieCalculator hidden">
         <p>Figure out your daily calorie intake</p>
         <form id="calculator" action="" method="">
             <label for="age">Age</label><input id="age" type="number" value="25" required><br>
@@ -44,22 +44,24 @@
             <button id="submit" type="submit">Submit</button>
         </form>
     </div>
-    <div class="caloriesScreen">
+    <div class="caloriesScreen hidden">
         <p id="recCal"></p>
         <button id="begin">Begin logging your calories</button>
         <button id="recalc">Recalculate</button>
     </div>
+    <div class="input hidden">
+    <div class="newFood">
+            <form id="foodForm" action="">
+                <label for="newName">Food Name</label>
+                <input id="newFoodName" type="text"><br>
+                <label for="newCalories">Calories</label>
+                <input id="newFoodCalories" type="number"><br>
+                <button id="nFSubmit" type="submit">Add</button>
+            </form>
+        </div>
     <div class="log">
 
     </div>
-    <div class="newFood">
-        <form id="foodForm" action="">
-            <label for="newName">Food Name</label>
-            <input id="newFoodName" type="text"><br>
-            <label for="newCalories">Calories</label>
-            <input id="newFoodCalories" type="number"><br>
-            <button id="nFSubmit" type="submit">Add</button>
-        </form>
     </div>
 </body>
 

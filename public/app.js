@@ -51,13 +51,25 @@ function calorieCalculator(){
         }else if(goal==="gain"){
             bmr = bmr + 500;
         }
+        $('.calorieCalculator').addClass('hidden');
+        $('.caloriesScreen').removeClass('hidden');
         $('#recCal').html(`
             You're recommended calories for the day are: ${bmr}
         `)
     })
 }
 
+function showList(){
+    $('#begin').click(function(event){
+        $('.caloriesScreen').addClass('hidden');
+        $('.input').removeClass('hidden');
+    })
+}
+
 calorieCalculator();
+showList();
+
+
 
 //requests
 let foodItemTemp = (`
