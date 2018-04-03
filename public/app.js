@@ -1,4 +1,4 @@
-function getUserInput(display){
+/*function getUserInput(display){
     $.getJSON('/foodlist', displayUserInput)
 };
 
@@ -19,7 +19,7 @@ function getAndDisplayUserInput(){
 
 $(function(){
     getAndDisplayUserInput();
-})
+})*/
 
 function begin(){
     $('.welcomeButton').click(function(event){
@@ -58,3 +58,89 @@ function calorieCalculator(){
 }
 
 calorieCalculator();
+
+//requests
+var foodItemTemp = (`
+    <li class="foodItem">
+        <p class="foodName"></p>
+        <p class="foodCalories"></p>
+        <button id="edit">Edit</button>
+        <button id="delete">Delete</button>
+    </li>
+`)
+
+var foodList_URL = '/foodList';
+
+function getAndDisplayFoodList(){
+    $.getJSON(foodList_URL, function(foods){
+        var foodElements = foods.map(function(food){
+            var element = $(foodItemTemp);
+            element.attr('id', item.id);
+            var foodName = element.find('.foodName');
+            foodName.text(food.name);
+            var foodCalories = element.find('.foodCalories');
+            foodCalories.text(food.calories);
+            return element
+        });
+        $('.log').html(foodElements);
+    });
+}
+
+function addFoodItem(item){
+    $.ajax({
+        method: 'POST',
+        url: foodList_URL,
+        data: JSON.stringify(item),
+        success: function(data){
+            getAndDisplayFoodList();
+        },
+        dataType: 'json',
+        contentType: 'application/json'
+    });
+}
+
+function deleteFoodItem(itemId){
+    $.ajax({
+        url: foodList_URL + '/' + itemId,
+        method: 'DELETE',
+        success: getAndDisplayFoodList
+    });
+}
+
+function updateFoodItem(item){
+    $.ajax({
+        url: foodList_URL + '/' + item.id,
+        method: 'PUT',
+        data: JSON.stringify(item),
+        success: function(data){
+            getAndDisplayFoodList()
+        },
+        dataType: 'json',
+        contentType: 'application/json'
+    });
+}
+
+function handleFoodItemAdd(){
+    $('#foodForm').submit(function(event){
+        event.preventDefault();
+        addFoodItem({
+            name: $(event.currentTarget).find('#newFoodName').val(),
+            calories: $(event.currentTarget).find('#newFoodCalories').val()
+        });
+    });
+}
+
+function handleDelete(){
+    $('.log').on('click', '#delete', function(event){
+        event.preventDefault();
+        deleteFoodItem(
+            $(event.currentTarget).closest('.foodItem').attr('id')
+        );
+    });
+}
+
+$(function(){
+    getAndDisplayFoodList();
+    handleDelete();
+    handleFoodItemAdd();
+});
