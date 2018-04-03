@@ -72,8 +72,8 @@ let foodItemTemp = (`
 let foodList_URL = '/foodList';
 
 function getAndDisplayFoodList(){
-    $.getJSON(foodList_URL, function(foods){
-        let foodElements = foods.map(function(food){
+    $.getJSON(foodList_URL, function(data){
+        let foodElements = data.foods.map(function(food){
             let element = $(foodItemTemp);
             element.attr('id', item.id);
             let foodName = element.find('.foodName');
