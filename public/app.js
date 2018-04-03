@@ -75,7 +75,7 @@ function getAndDisplayFoodList(){
     $.getJSON(foodList_URL, function(data){
         let foodElements = data.foods.map(function(food){
             let element = $(foodItemTemp);
-            element.attr('id', item.id);
+            element.attr('id', food.id);
             let foodName = element.find('.foodName');
             foodName.text(food.name);
             let foodCalories = element.find('.foodCalories');
