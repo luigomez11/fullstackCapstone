@@ -60,7 +60,7 @@ function calorieCalculator(){
 calorieCalculator();
 
 //requests
-var foodItemTemp = (`
+let foodItemTemp = (`
     <li class="foodItem">
         <p class="foodName"></p>
         <p class="foodCalories"></p>
@@ -69,16 +69,16 @@ var foodItemTemp = (`
     </li>
 `)
 
-var foodList_URL = '/foodList';
+let foodList_URL = '/foodList';
 
 function getAndDisplayFoodList(){
     $.getJSON(foodList_URL, function(foods){
-        var foodElements = foods.map(function(food){
-            var element = $(foodItemTemp);
+        let foodElements = foods.map(function(food){
+            let element = $(foodItemTemp);
             element.attr('id', item.id);
-            var foodName = element.find('.foodName');
+            let foodName = element.find('.foodName');
             foodName.text(food.name);
-            var foodCalories = element.find('.foodCalories');
+            let foodCalories = element.find('.foodCalories');
             foodCalories.text(food.calories);
             return element
         });
