@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const foodSchema = mongoose.Schema({
     name: {type: String, required: true},
     calories: {type: Number, required: true}
+    //user: type string, required: true
+    //date: (time)
 });
 
 foodSchema.methods.serialize = function(){

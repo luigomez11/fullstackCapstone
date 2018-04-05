@@ -31,7 +31,7 @@ function begin(){
 begin();
 
 function calorieCalculator(){
-    $('#calculator').on('click', ':submit', function(event){
+    $('#calculator').on('click', ':submit', function(event){  //use if statements for required
         event.preventDefault();
         let bmr;
         let gender = $('#gender').val();
@@ -74,9 +74,11 @@ showList();
 //requests
 let foodItemTemp = (`
     <li class="foodItem">
-        <p class="foodName"></p>
-        <p class="foodCalories"></p>
-        <button id="edit">Edit</button>
+        <p class="foodName"></p>` + 
+        //<input class="food">
+        `<p class="foodCalories"></p>` + 
+        //<input class="foodCalories"
+        `<button id="edit">Edit</button>
         <button id="delete">Delete</button>
     </li>
 `)
