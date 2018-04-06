@@ -1,9 +1,13 @@
 'use strict';
-
+require('dotenv').config();
 const bodyParser = require('body-parser');
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const passport = require('passport');
+
+const { router: usersRouter } = require('./users');
+const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 
 mongoose.Promise = global.Promise;
 
@@ -16,11 +20,29 @@ app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use(express.static('public'));
 
+app.use(function (req, res, next){
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+  if(req.method === 'OPTIONS'){
+    return res.send(204);
+  }
+  next();
+});
+
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+app.use('/api/users/', usersRouter);
+app.use('/api/auth/', authRouter);
+
+const jwtAuth = passport.authenticate('jwt', {session: false});
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-app.get('/foodList', (req,res) => {
+app.get('/foodList/protected', jwtAuth, (req,res) => {
   foodItem
     .find()
     .then(foods => {
@@ -35,7 +57,7 @@ app.get('/foodList', (req,res) => {
     });
 });
 
-app.get('/foodList/:id', (req,res) => {
+app.get('/foodList/:id/protected', jwtAuth, (req,res) => {
   foodItem
     .findById(req.params.id)
     .then(food => res.json(food.serialize()))
@@ -45,7 +67,7 @@ app.get('/foodList/:id', (req,res) => {
     });
 });
 
-app.post('/foodList', (req, res) => {
+app.post('/foodList/protected', jwtAuth, (req, res) => {
   const requiredFields = ['name', 'calories'];
   for(let i=0; i<requiredFields.length; i++){
     const field = requiredFields[i];
@@ -68,7 +90,7 @@ app.post('/foodList', (req, res) => {
     });
 });
 
-app.put('/foodList/:id', (req, res) => {
+app.put('/foodList/:id/protected', jwtAuth, (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
       `Request path id (${req.params.id}) and request body id ` +
@@ -92,7 +114,7 @@ app.put('/foodList/:id', (req, res) => {
     .catch(err => res.status(500).json({ message: 'Internal server error'}));
 });
 
-app.delete('/foodList/:id', (req, res) => {
+app.delete('/foodList/:id/protected', jwtAuth, (req, res) => {
   foodItem
     .findByIdAndRemove(req.params.id)
     .then(food => res.status(204).end())
