@@ -74,11 +74,10 @@ showList();
 //requests
 let foodItemTemp = (`
     <li class="foodItem">
-        <p class="foodName"></p>` + 
-        //<input class="food">
-        `<p class="foodCalories"></p>` + 
-        //<input class="foodCalories"
-        `<button id="edit">Edit</button>
+        <p class="foodName"></p>
+        <p class="foodCalories"></p>
+        <p class="foodDate"></p>
+        <button id="edit">Edit</button>
         <button id="delete">Delete</button>
     </li>
 `)
@@ -94,6 +93,8 @@ function getAndDisplayFoodList(){
             foodName.text(food.name);
             let foodCalories = element.find('.foodCalories');
             foodCalories.text(food.calories);
+            let foodDate = element.find('.foodDate');
+            foodDate.text(food.date);
             return element
         });
         $('.log').html(foodElements);
