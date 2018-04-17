@@ -1,19 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster|Open+Sans');
+
 * {
     box-sizing: border-box;
+    font-family: "Open Sans";
   }
-  @import url('https://fonts.googleapis.com/css?family=Lobster|Open+Sans');
+  
   
   header h1 {
-    font-family: 'Lobster', cursive;
     padding: 5rem 0;
     margin: 0;
     text-align: center;
   }
   
   header {
-    background-color: #0C2D42;
+    background-image: url('/header.jpg');
     color: white;
     margin: 0;
+
   }
   
   body {
@@ -21,7 +24,6 @@
     min-height: 700px;
     margin: 0 auto;
     box-shadow: 0 0 5px rgba(0, 0, 0, .2);
-    font-family: "Open Sans";
   }
   
   #welcome {
@@ -170,6 +172,12 @@
     margin: 0;
     background-color: #f9f8f8;
     padding: 1rem;
+  }
+
+  .updateCalories, .updateName {
+      padding: 1rem;
+      width: 80%;
+      margin: auto;
   }
   .foodItem .buttons {
     display: flex;

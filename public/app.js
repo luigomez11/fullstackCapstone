@@ -181,20 +181,21 @@ let foodItemTemp = (`
 
 function handleEditClick(){
     $('.log').on('click', '#edit', function(event){
-        $(event.currentTarget).parent().find('.foodName').addClass('hidden');
-        $(event.currentTarget).parent().find('.foodCalories').addClass('hidden');
-        $(event.currentTarget).parent().find('.updateName').removeClass('hidden');
-        $(event.currentTarget).parent().find('.updateCalories').removeClass('hidden');
+        $(event.currentTarget).parent().parent().find('.foodName').addClass('hidden');
+        $(event.currentTarget).parent().parent().find('.foodCalories').addClass('hidden');
+        $(event.currentTarget).parent().parent().find('.updateName').removeClass('hidden');
+        $(event.currentTarget).parent().parent().find('.updateCalories').removeClass('hidden');
         $(event.currentTarget).parent().find('#update').removeClass('hidden');
         $(event.currentTarget).parent().find('#edit').addClass('hidden');
         let id = $(event.currentTarget).closest('.foodItem').attr('id');
+        console.log($(event.currentTarget).parent().find('.updateCalories'));
         $('.log').on('click', '#update', function(event){
             console.log('update clicked');
             console.log(id);
             updateFoodItem({
                 id: id,
-                name: $(event.currentTarget).parent().find('.updateName').val(),
-                calories: $(event.currentTarget).parent().find('.updateCalories').val()
+                name: $(event.currentTarget).parent().parent().find('.updateName').val(),
+                calories: $(event.currentTarget).parent().parent().find('.updateCalories').val()
             })
         })
     })
@@ -240,6 +241,7 @@ function getFoodList(){
                 return element
             });
             $('.log').html(foodElements);
+            handleEditClick();
         },
         dataType: 'json',
         contentType: 'application/json'
@@ -383,7 +385,6 @@ $(function(){
     handleDelete();
     handleFoodItemAdd();
     sort();
-    handleEditClick();
     calorieCalculator();
     showList();
     recalculate();
