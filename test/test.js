@@ -26,7 +26,8 @@ function seedFoodData(){
 function generateFoodData(){
     return {
         name: faker.company.companyName(),
-        calories: faker.random.number()
+        calories: faker.random.number(),
+        user: faker.company.companyName()
     };
 }
 
