@@ -42,9 +42,9 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-app.get('/foodList/protected', jwtAuth, (req,res) => {
+app.get('/foodList/forUser/:userid', jwtAuth, (req,res) => {
   foodItem
-    .find()
+    .find({user: req.params.userid})
     .then(foods => {
       res.json({
         foods: foods.map(
@@ -57,7 +57,7 @@ app.get('/foodList/protected', jwtAuth, (req,res) => {
     });
 });
 
-app.get('/foodList/:id/protected', jwtAuth, (req,res) => {
+app.get('/foodList/single/:id', jwtAuth, (req,res) => {
   foodItem
     .findById(req.params.id)
     .then(food => res.json(food.serialize()))
@@ -67,8 +67,40 @@ app.get('/foodList/:id/protected', jwtAuth, (req,res) => {
     });
 });
 
-app.post('/foodList/protected', jwtAuth, (req, res) => {
-  const requiredFields = ['name', 'calories'];
+app.get('/foodList/forUser/:userid/asc/:sort', jwtAuth, (req,res) => {
+  foodItem
+    .find({user: req.params.userid})
+    .sort(`${req.params.sort}`)
+    .then(foods => {
+      res.json({
+        foods: foods.map(
+          (food) => food.serialize())
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ message: 'Internal server error'});
+    });
+})
+
+app.get('/foodList/forUser/:userid/dsc/:sort2', jwtAuth, (req,res) => {
+  foodItem
+    .find({user: req.params.userid})
+    .sort(`-${req.params.sort}`)
+    .then(foods => {
+      res.json({
+        foods: foods.map(
+          (food) => food.serialize())
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ message: 'Internal server error'});
+    });
+})
+
+app.post('/foodList', jwtAuth, (req, res) => {
+  const requiredFields = ['name', 'calories', 'user'];
   for(let i=0; i<requiredFields.length; i++){
     const field = requiredFields[i];
     if(!(field in req.body)){
@@ -81,7 +113,8 @@ app.post('/foodList/protected', jwtAuth, (req, res) => {
   foodItem
     .create({
       name: req.body.name,
-      calories: req.body.calories
+      calories: req.body.calories,
+      user: req.body.user
     })
     .then(food => res.status(201).json(food.serialize()))
     .catch(err => {
@@ -90,7 +123,7 @@ app.post('/foodList/protected', jwtAuth, (req, res) => {
     });
 });
 
-app.put('/foodList/:id/protected', jwtAuth, (req, res) => {
+app.put('/foodList/:id/', jwtAuth, (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
       `Request path id (${req.params.id}) and request body id ` +
@@ -100,7 +133,7 @@ app.put('/foodList/:id/protected', jwtAuth, (req, res) => {
   }
 
   const toUpdate = {};
-  const updateableFields = ['name', 'calories'];
+  const updateableFields = ['name', 'calories', 'user'];
 
   updateableFields.forEach(field => {
     if(field in req.body){
@@ -114,7 +147,7 @@ app.put('/foodList/:id/protected', jwtAuth, (req, res) => {
     .catch(err => res.status(500).json({ message: 'Internal server error'}));
 });
 
-app.delete('/foodList/:id/protected', jwtAuth, (req, res) => {
+app.delete('/foodList/:id/', jwtAuth, (req, res) => {
   foodItem
     .findByIdAndRemove(req.params.id)
     .then(food => res.status(204).end())

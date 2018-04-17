@@ -7,9 +7,8 @@ const moment = require('moment');
 const foodSchema = mongoose.Schema({
     name: {type: String, required: true},
     calories: {type: Number, required: true},
+    user: {type: String, required: true},
     date: {type: Date, default: Date.now}
-    //user: type string, required: true
-    //date: (time)
 });
 
 foodSchema.methods.serialize = function(){
@@ -17,6 +16,7 @@ foodSchema.methods.serialize = function(){
         id: this._id,
         name: this.name,
         calories: this.calories,
+        user: this.user,
         date: this.date
     };
 };

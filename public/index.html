@@ -8,11 +8,33 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="welcome"> <!--use section instead of div-->
-        <p>Welcome Screen. Insert description here. Click to continue</p>
-        <button class="welcomeButton">Continue</button>
-    </div>
-    <div class="calorieCalculator hidden">
+    <header>
+        <h1>CalTrak>></h1>
+        <button id="logout" class="hidden">Logout</button>
+    </header>
+    <section id="welcome"> <!--use section instead of div-->
+        <div class="welcome">
+            <p>Welcome Screen. Insert description here. Click to continue</p>
+            <button class="login">Login</button>
+            <button class="signup">Sign Up</button>
+        </div>
+        <p class="afterSignUp hidden">Use created credentials to log in.</p>
+        <form id="userLogin" class="hidden" action="" method="">
+            <label for="username">Username:</label><input id="username" type="text" required><br>
+            <label for="password">Password:</label><input id="password" type="text" required><br>
+            <button id="submit" type="submit">Submit</button>
+            <button class="noUser hidden">I don't have an account</button>
+        </form>
+        <form id="userSignUp" class="hidden" action="" method="">
+            <label for="firstName">First Name:</label><input id="firstName" type="text" required><br>
+            <label for="lastName">Last Name:</label><input id="lastName" type="text" required><br>
+            <label for="username">Username:</label><input id="username" type="text" required><br>
+            <label for="password">Password:</label><input id="password" type="text" required><br>
+            <button id="submit" type="submit">Submit</button>
+            <button class="yesUser hidden">Existing user</button>
+        </form>
+    </section>
+    <section class="calorieCalculator hidden">
         <p>Figure out your daily calorie intake</p>
         <form id="calculator" action="" method="">
             <label for="age">Age</label><input id="age" type="number" value="25" required><br>
@@ -43,29 +65,39 @@
             </select><br>
             <button id="submit" type="submit">Submit</button>
         </form>
-    </div>
-    <div class="caloriesScreen hidden">
+    </section>
+    <section class="caloriesScreen hidden">
         <p id="recCal"></p>
         <button id="begin">Begin logging your calories</button>
         <button id="recalc">Recalculate</button>
-    </div>
-    <div class="input hidden">
+    </section>
+    <section class="input hidden">
     <div class="newFood">
-            <form id="foodForm" action="">
+            <form id="foodForm">
                 <label for="newName">Food Name</label>
                 <input id="newFoodName" type="text"><br>
                 <label for="newCalories">Calories</label>
                 <input id="newFoodCalories" type="number"><br>
                 <button id="nFSubmit" type="submit">Add</button>
             </form>
-        </div>
+    </div>
+    <p class="total"></p>
+    <select name="sort" id="sort">
+        <option value="" selected>Sort by</option>
+        <option value="name">Name: a-z</option>
+        <option value="calories">Calories: asc</option>
+        <option value="date">Date: asc</option>
+        <!--<option value="name">Name: z-a</option>
+        <option value="calories">Calories: dsc</option>
+        <option value="date">Date: dsc</option>-->
+    </select>
     <div class="log">
 
     </div>
-    </div>
+</section>
 </body>
 
 <script src="https://code.jquery.com/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jwt-decode@2.2.0/build/jwt-decode.min.js"></script>
 <script type="text/javascript" src="app.js"></script>
-
 </html>
