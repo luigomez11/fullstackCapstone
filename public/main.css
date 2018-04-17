@@ -1,98 +1,279 @@
 * {
     box-sizing: border-box;
-}
-
-@import url('https://fonts.googleapis.com/css?family=Lobster');
-
-header h1 {
+  }
+  @import url('https://fonts.googleapis.com/css?family=Lobster|Open+Sans');
+  
+  header h1 {
     font-family: 'Lobster', cursive;
-    padding: 10px;
-}
-
-header {
-    background-color: #66d9ff;
+    padding: 5rem 0;
     margin: 0;
-}
-
-body  {
+    text-align: center;
+  }
+  
+  header {
+    background-color: #0C2D42;
+    color: white;
+    margin: 0;
+  }
+  
+  body {
     max-width: 1000px;
     min-height: 700px;
     margin: 0 auto;
-    border: 3px lightgrey solid;
-}
-
-#welcome {
+    box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+    font-family: "Open Sans";
+  }
+  
+  #welcome {
     position: relative;
-    top: 250px;
+    top: 150px;
     width: 100%;
-    
     text-align: center;
-}
-
-form * {
+  }
+  
+  form * {
     margin: 2px;
-}
-
-#userSignUp, #userLogin {
+  }
+  
+  #userLogin,
+  #userSignUp,
+  #foodForm {
     text-align: center;
     position: inline-block;
     margin-left: auto;
     margin-right: auto;
-}
-
-.calorieCalculator {
-    position: relative;
-    top: 250px;
-    width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-
-}
-
-.calorieCalculator p {
+  }
+  
+  #foodForm {
+    margin-top: 1rem;
+  }
+  
+  .total {
     text-align: center;
-}
-
-.caloriesScreen {
+  }
+  
+  #sort {
+    margin: 0 auto 1rem;
+    display: block;
+      outline: 0;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      padding: 0.4rem;
+      border-radius: 0;
+      background-position: center right 0.4em;
+      background-repeat: no-repeat;
+      background-size: 0.8rem;
+      background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxMjkgMTI5IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAxMjkgMTI5IiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij4KICA8Zz4KICAgIDxwYXRoIGQ9Im0xMjEuMywzNC42Yy0xLjYtMS42LTQuMi0xLjYtNS44LDBsLTUxLDUxLjEtNTEuMS01MS4xYy0xLjYtMS42LTQuMi0xLjYtNS44LDAtMS42LDEuNi0xLjYsNC4yIDAsNS44bDUzLjksNTMuOWMwLjgsMC44IDEuOCwxLjIgMi45LDEuMiAxLDAgMi4xLTAuNCAyLjktMS4ybDUzLjktNTMuOWMxLjctMS42IDEuNy00LjIgMC4xLTUuOHoiIGZpbGw9IiMwMDZERjAiLz4KICA8L2c+Cjwvc3ZnPgo=);
+      border-color: #eee;
+  }
+  
+  .calorieCalculator {
     position: relative;
-    top: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: baseline;
+        max-width: 500px;
+        margin: 0 auto;
+        align-content: center;
+        justify-items: center;
+        align-items: center;
+  }
+  
+  .calorieCalculator p {
+    text-align: center;
+  }
+  
+  .caloriesScreen {
+    position: relative;
+    top: 150px;
     width: 100%;
     text-align: center;
-}
+  }
+  
+  .login, .signup {
+    max-width: 20rem;
+    margin: 0 auto;
+  }
+  
+  
+  .login__row, .signup__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .calculator__row {
+    margin-bottom: 1rem;
+    min-height: 2rem;
+  }
+  .calculator__row label {
+    display: flex;
+    align-content: center;
+    flex-direction: row;
+    align-items: center;
+  }
 
-.input {
-    width: 100%;
-}
+  .calculator__row label > span {
+    min-width: 5rem;
+    float: left;
+    display: block;
+  }
+  .calculator__row label > span:after {
+    content: ":";
+    color: #999;
+    padding-left: .1rem;
+  }
+  .calculator__row label input {
+    padding: 0.4rem;
+    outline: 0;
+  }
+  .calculator__row label select {
+    outline: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: .4rem 14px;
+    border-radius: 0;
+    border-color: #eee;
+    background-position: center right 0.4em;
+    background-repeat: no-repeat;
+    background-size: 0.8rem;
+    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxMjkgMTI5IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAxMjkgMTI5IiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij4KICA8Zz4KICAgIDxwYXRoIGQ9Im0xMjEuMywzNC42Yy0xLjYtMS42LTQuMi0xLjYtNS44LDBsLTUxLDUxLjEtNTEuMS01MS4xYy0xLjYtMS42LTQuMi0xLjYtNS44LDAtMS42LDEuNi0xLjYsNC4yIDAsNS44bDUzLjksNTMuOWMwLjgsMC44IDEuOCwxLjIgMi45LDEuMiAxLDAgMi4xLTAuNCAyLjktMS4ybDUzLjktNTMuOWMxLjctMS42IDEuNy00LjIgMC4xLTUuOHoiIGZpbGw9IiMwMDZERjAiLz4KICA8L2c+Cjwvc3ZnPgo=);
+  }
+  .calculator__row--height input {
+    max-width: 3.6rem;
+    margin-right: 0.2rem;
+  }
+  .calculator__row--height input:nth-child(3) {
+    margin-left: 0.5rem;
+  }
+  .calculator__row--width input {
+    max-width: 3.6rem;
+    margin-right: 0.2rem;
+  }
+  .calculator button {
+    border: 1px solid #f2f2f2;
+    padding: 10px 31px;
+    cursor: pointer;
+    transition: 0.7s;
+  }
+  
+  .foodItem {
+    display: flex;
+    flex-direction: column;
+    max-width: 20rem;
+    text-align: center;
+    color: #0c2d42;
+    border-top: 3px solid #3CC9BB;
+  }
+  .foodItem .foodName {
+    font-size: 2rem;
+    margin: 0;
+    background-color: #f9f8f8;
+    padding: 1rem;
+  }
+  .foodItem .buttons {
+    display: flex;
+    justify-content: space-evenly;
+  }
 
-li {
-    list-style-type: none;
-}
-
-
-
-.hidden {
+  .foodItem #edit,
+  .foodItem #delete,
+  .foodItem #update {
+    border: 1px solid #f2f2f2;
+    padding: 10px 31px;
+    cursor: pointer;
+    transition: 0.7s;
+  }
+  
+  #delete {
+    background-color: #f2f2f2;
+    color: #999;
+  }
+  #delete:hover {
+    background-color: red;
+    color: white;
+  }
+  .foodItem .foodCalories:after {
+    content: " calories";
+    color: #555;
+  }
+  
+  .hidden {
     display: none;
-}
-
-.foodName, .foodCalories {
+  }
+  
+  
+  
+  .input {
+    width: 100%;
+  }
+  
+  
+  form input {
+    padding: 6px 8px;
+    outline: 0;
+  }
+  
+  button {
+    border: 1px solid #f2f2f2;
+    padding: 10px 31px;
+    cursor: pointer;
+    transition: .7s;
+  }
+  
+  
+  button:hover {
+    background-color: #f2f2f2;
+  }
+  
+  li {
+    list-style-type: none;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .foodCalories,
+  .foodName {
     text-align: center;
+  }
+  
+  .log {
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
+  }
+  
+  .foodItem {
+    height: 300px;
+    margin-bottom: 1rem;
+    width: 33%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  }
+  
+  .foodItem:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
 
-}
-
-.foodItem {
+  @media only screen and (max-width: 640px){
+    .foodItem {
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
-        background: #fff;
-        border-radius: 2px;
-        display: inline-block;
-        height: 300px;
-        margin: 1rem;
-        position: relative;
-        width: 300px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-}
+      }
 
-.foodItem:hover {
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-}
+      .log {
+        display: block;
+        margin-bottom: .5rem;
+      }      
+      .calculator__row label {
+        flex-direction: column;
+        text-align: center;
+      }
+      .calculator {
+        display: flex;
+        flex-direction: column;
+      }
+  }

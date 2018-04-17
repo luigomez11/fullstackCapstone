@@ -1,26 +1,3 @@
-/*function getUserInput(display){
-    $.getJSON('/foodlist', displayUserInput)
-};
-
-function displayUserInput(data){
-    console.log(data);
-    data.foods.forEach(function(item){
-        for(key in item){
-            $('.log').append(
-                '<p>' + item[key] + '</p>'
-            );
-        }
-    });
-};
-
-function getAndDisplayUserInput(){
-    getUserInput(displayUserInput);
-};
-
-$(function(){
-    getAndDisplayUserInput();
-})*/
-
 let token;
 let userId;
 let bmr;
@@ -38,8 +15,6 @@ function begin(){
     });
 };
 
-begin();
-
 function yesOrNoUser(){
     $('.noUser').click(function(event){
         $('#userLogin').addClass('hidden');
@@ -55,8 +30,6 @@ function yesOrNoUser(){
     });
 }
 
-yesOrNoUser();
-
 
 function userLoginSubmit(){
     $('#userLogin').submit(function(event){
@@ -67,8 +40,6 @@ function userLoginSubmit(){
         })
     })
 }
-
-userLoginSubmit();
 
 function userLogout(){
     $('#logout').click(function(event){
@@ -85,7 +56,6 @@ function userLogout(){
         $('#password').val('');
     })
 }
-userLogout();
 
 function calorieCalculator(){
     $('#calculator').on('click', ':submit', function(event){  //use if statements for required
@@ -110,7 +80,7 @@ function calorieCalculator(){
         $('.calorieCalculator').addClass('hidden');
         $('.caloriesScreen').removeClass('hidden');
         $('#recCal').html(`
-            You're recommended calories for the day are: ${bmr}
+            Your recommended calories for the day are: ${bmr}
         `)
     })
 }
@@ -121,7 +91,6 @@ function recalculate(){
         $('.calorieCalculator').removeClass('hidden');
     })
 }
-recalculate();
 
 function showList(){
     $('#begin').click(function(event){
@@ -135,9 +104,6 @@ function showList(){
 function updateRemaining(){
     $('.total').html(`Remaining calories: ${bmr}`);
 }
-
-calorieCalculator();
-showList();
 
 //jwt requests
 function userLoginPost(item){
@@ -205,10 +171,11 @@ let foodItemTemp = (`
         <p class="foodCalories"></p>
         <input class="updateCalories hidden" type="text" required><br>
         <p class="foodDate"></p>
-
+        <div class="buttons">
         <button id="update" class="hidden">Update</button>
         <button id="edit">Edit</button>
         <button id="delete">Delete</button>
+        </div>
     </li>
 `);
 
@@ -233,8 +200,6 @@ function handleEditClick(){
     })
 }
 
-handleEditClick();
-
 function updateFoodItem(item){
     console.log(item);
     $.ajax({
@@ -249,9 +214,6 @@ function updateFoodItem(item){
         contentType: 'application/json'
     });
 }
-
-let nameVar;
-let calVar;
 
 function getFoodList(){
     $.ajax({
@@ -293,8 +255,6 @@ function sort(){
         }
     })
 }
-
-sort();
 
 function getFoodListSorted1(sort){
     $.ajax({
@@ -385,36 +345,7 @@ function handleDelete(){
     });
 }
 
-handleDelete();
 
-/*function displayFoodList(data){
-    getFoodList();
-    let foodElements = data.foods.map(function(food){
-        let element = $(foodItemTemp);
-        element.attr('id', food.id);
-        element.attr('user', food.user);
-        let foodName = element.find('.foodName');
-        foodName.text(food.name);
-        let foodCalories = element.find('.foodCalories');
-        foodCalories.text(food.calories);
-        let foodDate = element.find('.foodDate');
-        foodDate.text(food.date);
-        return element
-});
-$('.log').html(foodElements);
-}*/
-
-handleFoodItemAdd();
-
-/*function userLogin(){
-    $('#userLogin').submit(function(event){
-        event.preventDefault();
-        userLoginPost({
-            username: $(event.currentTarget).find('#username').val(),
-            password: $(event.currentTarget).find('#password').val()
-        });
-    });
-}*/
 
 
 function userSignUpPost(item){
@@ -445,185 +376,18 @@ function userSignUp(){
     });
 }
 
-userSignUp();
-userSignUpPost();
-/*
-//logout empty token value, go back to first page
-
-function authorized(token){
-    let foodItemTemp = (`
-    <li class="foodItem">
-        <p class="foodName"></p>
-        <p class="foodCalories"></p>
-        <p class="foodDate"></p>
-        <button id="edit">Edit</button>
-        <button id="delete">Delete</button>
-    </li>
-`);
-
-let foodList_URL = '/foodList';
-
-function getAndDisplayFoodList(){
-    $.getJSON(foodList_URL, function(data){
-        let foodElements = data.foods.map(function(food){
-            let element = $(foodItemTemp);
-            element.attr('id', food.id);
-            let foodName = element.find('.foodName');
-            foodName.text(food.name);
-            let foodCalories = element.find('.foodCalories');
-            foodCalories.text(food.calories);
-            let foodDate = element.find('.foodDate');
-            foodDate.text(food.date);
-            return element
-        });
-        $('.log').html(foodElements);
-    });
-}
-
-function addFoodItem(item){
-    $.ajax({
-        method: 'POST',
-        url: foodList_URL,
-        data: JSON.stringify(item),
-        success: function(data){
-            getAndDisplayFoodList();
-        },
-        dataType: 'json',
-        contentType: 'application/json'
-    });
-}
-
-function deleteFoodItem(itemId){
-    $.ajax({
-        url: foodList_URL + '/' + itemId,
-        method: 'DELETE',
-        success: getAndDisplayFoodList
-    });
-}
-
-function updateFoodItem(item){
-    $.ajax({
-        url: foodList_URL + '/' + item.id,
-        method: 'PUT',
-        data: JSON.stringify(item),
-        success: function(data){
-            getAndDisplayFoodList()
-        },
-        dataType: 'json',
-        contentType: 'application/json'
-    });
-}
-
-function handleFoodItemAdd(){
-    $('#foodForm').submit(function(event){
-        event.preventDefault();
-        addFoodItem({
-            name: $(event.currentTarget).find('#newFoodName').val(),
-            calories: $(event.currentTarget).find('#newFoodCalories').val()
-        });
-    });
-}
-
-function handleDelete(){
-    $('.log').on('click', '#delete', function(event){
-        event.preventDefault();
-        deleteFoodItem(
-            $(event.currentTarget).closest('.foodItem').attr('id')
-        );
-    });
-}
-}*/
-
-//api requests
-
-/*let foodItemTemp = (`
-    <li class="foodItem">
-        <p class="foodName"></p>
-        <p class="foodCalories"></p>
-        <p class="foodDate"></p>
-        <button id="edit">Edit</button>
-        <button id="delete">Delete</button>
-    </li>
-`)
-
-let foodList_URL = '/foodList';
-
-function getAndDisplayFoodList(){
-    $.getJSON(foodList_URL, function(data){
-        let foodElements = data.foods.map(function(food){
-            let element = $(foodItemTemp);
-            element.attr('id', food.id);
-            let foodName = element.find('.foodName');
-            foodName.text(food.name);
-            let foodCalories = element.find('.foodCalories');
-            foodCalories.text(food.calories);
-            let foodDate = element.find('.foodDate');
-            foodDate.text(food.date);
-            return element
-        });
-        $('.log').html(foodElements);
-    });
-}
-
-function addFoodItem(item){
-    $.ajax({
-        method: 'POST',
-        url: foodList_URL,
-        data: JSON.stringify(item),
-        success: function(data){
-            getAndDisplayFoodList();
-        },
-        dataType: 'json',
-        contentType: 'application/json'
-    });
-}
-
-function deleteFoodItem(itemId){
-    $.ajax({
-        url: foodList_URL + '/' + itemId,
-        method: 'DELETE',
-        success: getAndDisplayFoodList
-    });
-}
-
-function updateFoodItem(item){
-    $.ajax({
-        url: foodList_URL + '/' + item.id,
-        method: 'PUT',
-        data: JSON.stringify(item),
-        success: function(data){
-            getAndDisplayFoodList()
-        },
-        dataType: 'json',
-        contentType: 'application/json'
-    });
-}
-
-function handleFoodItemAdd(){
-    $('#foodForm').submit(function(event){
-        event.preventDefault();
-        addFoodItem({
-            name: $(event.currentTarget).find('#newFoodName').val(),
-            calories: $(event.currentTarget).find('#newFoodCalories').val()
-        });
-    });
-}
-
-function handleDelete(){
-    $('.log').on('click', '#delete', function(event){
-        event.preventDefault();
-        deleteFoodItem(
-            $(event.currentTarget).closest('.foodItem').attr('id')
-        );
-    });
-}*/
-
-/*$(function(){
-    getAndDisplayFoodList();
-    handleDelete();
-    handleFoodItemAdd();
-    userLogin();
-    userLoginPost();
+$(function(){
+    begin();
     userSignUp();
     userSignUpPost();
-});*/
+    handleDelete();
+    handleFoodItemAdd();
+    sort();
+    handleEditClick();
+    calorieCalculator();
+    showList();
+    recalculate();
+    userLogout();
+    userLoginSubmit();
+    yesOrNoUser();
+});
