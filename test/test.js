@@ -57,7 +57,7 @@ describe('Calories API resource', function(){
         it('should return all exisiting food items', function(){
             let res;
             return chai.request(app)
-                .get('/foodList')
+                .get('/foodList/forUser/:userid')
                 .then(function(_res){
                     res = _res;
                     expect(res).to.have.status(200);
@@ -72,7 +72,7 @@ describe('Calories API resource', function(){
         it('should return food items with right fields', function(){
             let resFood;
             return chai.request(app)
-                .get('/foodList')
+                .get('/foodList/forUser/:userid')
                 .then(function(res){
                     expect(res).to.have.status(200);
                     expect(res).to.be.json;
