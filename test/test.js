@@ -57,7 +57,6 @@ describe('Calories API resource', function(){
         it('should return all exisiting food items', function(){ // how to use chai to make a request with custom header
             let res;
             return chai.request(app)
-                .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoibHVpZ29tZXoxMSIsImZpcnN0TmFtZSI6Ikx1aXNBbmdlbCIsImxhc3ROYW1lIjoiR29tZXoiLCJpZCI6IjVhYzgyN2VlYzJkOTU3NGU5MDc1ZDU4ZiJ9LCJpYXQiOjE1MjM1NjQ1OTUsImV4cCI6MTUyNDE2OTM5NSwic3ViIjoibHVpZ29tZXoxMSJ9.CXwyQbx4EKXRiskvGkAfCP2HDWfy8_HfNrafNjrsL5w')
                 .get('/foodList/forUser/:userid')
                 .then(function(_res){
                     res = _res;
