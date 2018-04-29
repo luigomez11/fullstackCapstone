@@ -80,7 +80,7 @@ function calorieCalculator(){
         $('.calorieCalculator').addClass('hidden');
         $('.caloriesScreen').removeClass('hidden');
         $('#recCal').html(`
-            Your recommended calories for the day are: ${bmr}
+            Your recommended calories for the day are: <br><span class="calfont">${bmr}</span>
         `)
     })
 }
@@ -96,13 +96,13 @@ function showList(){
     $('#begin').click(function(event){
         $('.caloriesScreen').addClass('hidden');
         $('.input').removeClass('hidden');
-        $('.total').html(`Remaining calories: ${bmr}`);
+        $('.total').html(`Remaining calories: <br><span class="calfont">${bmr}</span>`);
         getFoodList();
     });
 }
 
 function updateRemaining(){
-    $('.total').html(`Remaining calories: ${bmr}`);
+    $('.total').html(`Remaining calories: <br><span class="calfont">${bmr}</span>`);
 }
 
 //jwt requests
@@ -237,7 +237,7 @@ function getFoodList(){
                 let foodCaloriesInput = element.find('.updateCalories');
                 foodCaloriesInput.val(food.calories);
                 let foodDate = element.find('.foodDate');
-                foodDate.text(food.date);
+                foodDate.text(moment().format(food.date));
                 return element
             });
             $('.log').html(foodElements);

@@ -5,27 +5,42 @@
     font-family: "Open Sans";
   }
   
+html {
+    background-color: #ececec;
+}
   
-  header h1 {
-    padding: 5rem 0;
-    margin: 0;
-    text-align: center;
-  }
+header h1 {
+  padding: 15px;
+  text-align: center;
+  background-color: #00000078;
+  margin-bottom: 16px;
+  font-size: 60px;
+}
   
-  header {
-    background-image: url('/header.jpg');
-    color: white;
-    margin: 0;
-
-  }
+header {
+  background-image: url(/header.jpg);
+  color: white;
+  margin: 0;
+  padding: 30px 0;
+  height: 243px;
+  position: relative;
+}
   
   body {
     max-width: 1000px;
-    min-height: 700px;
+    min-height: 750px;
     margin: 0 auto;
     box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+    background-color: #f6f6f6;
   }
-  
+  #logout{
+    background-color: #f57373;
+    color: white;
+    border: 1px solid #ef4747;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
   #welcome {
     position: relative;
     top: 150px;
@@ -71,15 +86,18 @@
   
   .calorieCalculator {
     position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: baseline;
-        max-width: 500px;
-        margin: 0 auto;
-        align-content: center;
-        justify-items: center;
-        align-items: center;
-  }
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 28px;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    border: 1px lightgrey solid;
+    padding: 20px;
+}
   
   .calorieCalculator p {
     text-align: center;
@@ -108,18 +126,23 @@
     margin-bottom: 1rem;
     min-height: 2rem;
   }
+  
   .calculator__row label {
     display: flex;
     align-content: center;
     flex-direction: row;
     align-items: center;
-  }
+    font-size: 11px;
+}
 
   .calculator__row label > span {
     min-width: 5rem;
     float: left;
     display: block;
+    color: #929292;
+    font-size: 15px;
   }
+
   .calculator__row label > span:after {
     content: ":";
     color: #999;
@@ -128,8 +151,11 @@
   .calculator__row label input {
     padding: 0.4rem;
     outline: 0;
+    background-color: #f7f7f7;
+    border: 1px solid lightgray;
   }
-  .calculator__row label select {
+
+.calculator__row label select {
     outline: 0;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -139,8 +165,15 @@
     background-position: center right 0.4em;
     background-repeat: no-repeat;
     background-size: 0.8rem;
-    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxMjkgMTI5IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAxMjkgMTI5IiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij4KICA8Zz4KICAgIDxwYXRoIGQ9Im0xMjEuMywzNC42Yy0xLjYtMS42LTQuMi0xLjYtNS44LDBsLTUxLDUxLjEtNTEuMS01MS4xYy0xLjYtMS42LTQuMi0xLjYtNS44LDAtMS42LDEuNi0xLjYsNC4yIDAsNS44bDUzLjksNTMuOWMwLjgsMC44IDEuOCwxLjIgMi45LDEuMiAxLDAgMi4xLTAuNCAyLjktMS4ybDUzLjktNTMuOWMxLjctMS42IDEuNy00LjIgMC4xLTUuOHoiIGZpbGw9IiMwMDZERjAiLz4KICA8L2c+Cjwvc3ZnPgo=);
-  }
+    background-color: #f7f7f7;
+    border: 1px solid lightgray;
+    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRm…ctMS42IDEuNy00LjIgMC4xLTUuOHoiIGZpbGw9IiMwMDZERjAiLz4KICA8L2c+Cjwvc3ZnPgo=);
+}
+
+.accent-color {
+  background-color: #5c6dc5;
+  color: white;
+}
   .calculator__row--height input {
     max-width: 3.6rem;
     margin-right: 0.2rem;
@@ -152,25 +185,32 @@
     max-width: 3.6rem;
     margin-right: 0.2rem;
   }
+
   .calculator button {
     border: 1px solid #f2f2f2;
     padding: 10px 31px;
     cursor: pointer;
     transition: 0.7s;
-  }
+    display: block;
+    margin: auto;
+    width: 100%;
+}
   
-  .foodItem {
-    display: flex;
-    flex-direction: column;
-    max-width: 20rem;
-    text-align: center;
-    color: #0c2d42;
-    border-top: 3px solid #3CC9BB;
-  }
+.foodItem {
+  display: block;
+  flex-direction: column;
+  max-width: 18rem;
+  text-align: center;
+  color: #0c2d42;
+  border-top: 3px solid #5c6dc5;
+}
+
+.calfont{
+  font-size: 30px;
+}
   .foodItem .foodName {
     font-size: 2rem;
     margin: 0;
-    background-color: #f9f8f8;
     padding: 1rem;
   }
 
@@ -178,6 +218,7 @@
       padding: 1rem;
       width: 80%;
       margin: auto;
+      margin-top: 20px;
   }
   .foodItem .buttons {
     display: flex;
@@ -240,6 +281,10 @@
   
   .hidden {
     display: none;
+  }
+  .foodName {
+    background-color: #5c6dc5;
+    color: white;
   }
   
   .foodCalories,

@@ -9,13 +9,13 @@
 </head>
 <body>
     <header>
-        <h1><< CalTrak >></h1>
+        <h1>CalTrak</h1>
         <button id="logout" class="hidden">Logout</button>
     </header>
     <section id="welcome">
         <div class="welcome">
-            <p>Welcome Screen to CalTrak. Click to continue.</p>
-            <button class="login">Login</button>
+            <p>Welcome to CalTrak, an app you can use to track your daily caloric intake. Please log in to continue.</p>
+            <button class="login accent-color">Login</button>
             <button class="signup">Sign Up</button>
         </div>
         <p class="afterSignUp hidden">Use created credentials to log in.</p>
@@ -26,7 +26,7 @@
           <div class="login__row">
             <label for="password">Password:</label><input id="password" type="password" required>
           </div>
-            <button id="submit" type="submit">Submit</button>
+            <button id="submit" class="accent-color" type="submit">Submit</button>
             <button class="noUser hidden">I don't have an account</button>
         </form>
         <form id="userSignUp" class="hidden signup" action="" method="">
@@ -42,7 +42,7 @@
           <div class="login__row">
             <label for="password">Password:</label><input id="password" type="password" required>
           </div>
-            <button id="submit" type="submit">Submit</button>
+            <button id="submit" class="accent-color" type="submit">Submit</button>
             <button class="yesUser hidden">Existing user</button>
         </form>
     </section>
@@ -93,12 +93,12 @@
                     </select>
                     </label>
                   </div>
-                  <button id="submit" type="submit">Submit</button>
+                  <button id="submit" class="accent-color" type="submit">Submit</button>
                 </form>
     </section>
     <section class="caloriesScreen hidden">
         <p id="recCal"></p>
-        <button id="begin">Begin logging your calories</button>
+        <button id="begin" class="accent-color">Begin logging your calories</button>
         <button id="recalc">Recalculate</button>
     </section>
     <section class="input hidden">
@@ -131,5 +131,6 @@
 
 <script src="https://code.jquery.com/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jwt-decode@2.2.0/build/jwt-decode.min.js"></script>
+<script src="http://momentjs.com/downloads/moment.js"></script>
 <script type="text/javascript" src="app.js"></script>
 </html>
