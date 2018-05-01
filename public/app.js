@@ -237,7 +237,8 @@ function getFoodList(){
                 let foodCaloriesInput = element.find('.updateCalories');
                 foodCaloriesInput.val(food.calories);
                 let foodDate = element.find('.foodDate');
-                foodDate.text(moment().format(food.date));
+                console.log(food.date);
+                foodDate.text(moment(food.date).format("MMM Do YY, h:mm a"));
                 return element
             });
             $('.log').html(foodElements);
@@ -250,10 +251,8 @@ function getFoodList(){
 
 function sort(){
     $('#sort').click(function(event){
-        if($(event.currentTarget).val() === "name1" || "calories1" || "date1"){
+        if($(event.currentTarget).val() === "name" || "calories" || "date"){
             getFoodListSorted1($(event.currentTarget).val());
-        }else{
-            getFoodListSorted2($(event.currentTarget).val());
         }
     })
 }
@@ -279,38 +278,7 @@ function getFoodListSorted1(sort){
                 let foodCaloriesInput = element.find('.updateCalories');
                 foodCaloriesInput.val(food.calories);
                 let foodDate = element.find('.foodDate');
-                foodDate.text(food.date);
-                return element
-            });
-            $('.log').html(foodElements);
-        },
-        dataType: 'json',
-        contentType: 'application/json'
-    });
-}
-
-function getFoodListSorted2(sort){
-    $.ajax({
-        method: 'GET',
-        url: `/foodList/forUser/${userId}/dsc/${sort}`,
-        headers: {
-            'Authorization':`Bearer ${token}`
-        },
-        success: function(data){
-            let foodElements = data.foods.map(function(food){
-                element = $(foodItemTemp);
-                element.attr('id', food.id);
-                element.attr('calories', food.calories);
-                let foodName = element.find('.foodName');
-                foodName.text(food.name);
-                let foodNameInput = element.find('.updateName');
-                foodNameInput.val(food.name);
-                let foodCalories = element.find('.foodCalories');
-                foodCalories.text(food.calories);
-                let foodCaloriesInput = element.find('.updateCalories');
-                foodCaloriesInput.val(food.calories);
-                let foodDate = element.find('.foodDate');
-                foodDate.text(food.date);
+                foodDate.text(moment(food.date).format("MMM Do YY, h:mm a"));
                 return element
             });
             $('.log').html(foodElements);
