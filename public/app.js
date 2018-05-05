@@ -15,13 +15,16 @@ function begin(){
     });
 };
 
-function yesOrNoUser(){
+function noUser(){
     $('.noUser').click(function(event){
         $('#userLogin').addClass('hidden');
         $('#userSignUp').removeClass('hidden');
         $('.noUser').addClass('hidden');
         $('.yesUser').removeClass('hidden');
     });
+}
+
+function yesUser(){
     $('.yesUser').click(function(event){
         $('#userSignUp').addClass('hidden');
         $('#userLogin').removeClass('hidden');
@@ -358,5 +361,6 @@ $(function(){
     recalculate();
     userLogout();
     userLoginSubmit();
-    yesOrNoUser();
+    noUser();
+    yesUser();
 });
