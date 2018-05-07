@@ -3,13 +3,15 @@ let userId;
 let bmr;
 
 function begin(){
-    $('.login').click(function(event){
-        $('#userLogin').removeClass('hidden');
+    $('.login-btn').click(function(event){
+        console.log('login');
+        $('.userLogin').removeClass('hidden');
         $('.welcome').addClass('hidden');
         $('.noUser').removeClass('hidden');
     });
-    $('.signup').click(function(event){
-        $('#userSignUp').removeClass('hidden');
+    $('.signup-btn').click(function(event){
+        console.log('signup');
+        $('.userSignUp').removeClass('hidden');
         $('.welcome').addClass('hidden');
         $('.yesUser').removeClass('hidden');
     });
@@ -17,8 +19,9 @@ function begin(){
 
 function noUser(){
     $('.noUser').click(function(event){
-        $('#userLogin').addClass('hidden');
-        $('#userSignUp').removeClass('hidden');
+        console.log('clicked');
+        $('.userLogin').addClass('hidden');
+        $('.userSignUp').removeClass('hidden');
         $('.noUser').addClass('hidden');
         $('.yesUser').removeClass('hidden');
     });
@@ -26,8 +29,8 @@ function noUser(){
 
 function yesUser(){
     $('.yesUser').click(function(event){
-        $('#userSignUp').addClass('hidden');
-        $('#userLogin').removeClass('hidden');
+        $('.userSignUp').addClass('hidden');
+        $('.userLogin').removeClass('hidden');
         $('.yesUser').addClass('hidden');
         $('.noUser').removeClass('hidden');
     });
@@ -35,11 +38,12 @@ function yesUser(){
 
 
 function userLoginSubmit(){
-    $('#userLogin').submit(function(event){
+    $('#submitLog').click(function(event){
+        console.log('clicked');
         event.preventDefault();
         userLoginPost({
-            username: $(event.currentTarget).find('#username').val(),
-            password: $(event.currentTarget).find('#password').val()
+            username: $('#userLogin').find('#usernameLog').val(),
+            password: $('#userLogin').find('#passwordLog').val()
         })
     })
 }
@@ -55,13 +59,15 @@ function userLogout(){
         $('.caloriesScreen').addClass('hidden');
         $('.input').addClass('hidden');
         $('#logout').addClass('hidden');
-        $('#username').val('');
-        $('#password').val('');
+        $('#usernameLog').val('');
+        $('#usernameSign').val('');
+        $('#passwordLog').val('');
+        $('#passwordSign').val('');
     })
 }
 
 function calorieCalculator(){
-    $('#calculator').on('click', ':submit', function(event){  //use if statements for required
+    $('#submitBMR').click(function(event){  //use if statements for required
         event.preventDefault();
         let gender = $('#gender').val();
         let age = $('#age').val()*1;
@@ -343,8 +349,8 @@ function userSignUp(){
         userSignUpPost({
             firstName: $(event.currentTarget).find('#firstName').val(),
             lastName: $(event.currentTarget).find('#lastName').val(),
-            username: $(event.currentTarget).find('#username').val(),
-            password: $(event.currentTarget).find('#password').val()
+            username: $(event.currentTarget).find('#usernameSign').val(),
+            password: $(event.currentTarget).find('#passwordSign').val()
         });
     });
 }
@@ -352,7 +358,6 @@ function userSignUp(){
 $(function(){
     begin();
     userSignUp();
-    userSignUpPost();
     handleDelete();
     handleFoodItemAdd();
     sort();

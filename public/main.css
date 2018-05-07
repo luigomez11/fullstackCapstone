@@ -7,6 +7,8 @@
   
 html {
     background-color: #ececec;
+    padding-left: 20px;
+    padding-right: 20px;
 }
   
 header h1 {
@@ -46,6 +48,8 @@ header {
     top: 150px;
     width: 100%;
     text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
   }
   
   form * {
